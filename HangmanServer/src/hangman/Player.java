@@ -14,7 +14,7 @@ import java.io.IOException;
  * 
  * @author Claudio Cusano <claudio.cusano@unipv.it>
  */
-abstract public class Player implements GameObserver {
+abstract public class Player extends Thread implements GameObserver {
     /**
      * Method called when the player has to guess a letter.
      * 

@@ -23,15 +23,16 @@ public class HangmanServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        Hangman game = new Hangman();
-        int port=8888;
-        ServerSocket serverSocket=new ServerSocket(port);
-        Socket socket=serverSocket.accept();
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        BufferedReader in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        RemotePlayer player=new RemotePlayer(out,in);       
-        
-        game.playGame(player);
+        Hangman hangman = new Hangman();
+        int port = 8888;
+        ServerSocket serverSocket = new ServerSocket(port);
+        while (true) {
+            Socket socket = serverSocket.accept();
+            RemotePlayer client = new RemotePlayer(socket, hangman);
+            client.start();
+        }
+
+       
     }
-    
+
 }
